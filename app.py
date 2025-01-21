@@ -18,6 +18,7 @@ def plot_drawdown_chart(filtered_df, ticker):
     plt.yticks(fontsize=10)
     st.pyplot(fig)
 
+
 def plot_log_return_chart(filtered_df, ticker):
     """Plots the Logarithmic Relative Return Chart"""
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -30,6 +31,8 @@ def plot_log_return_chart(filtered_df, ticker):
     plt.xticks(rotation=45, fontsize=10)
     plt.yticks(fontsize=10)
     st.pyplot(fig)
+
+
 def plot_return_chart(filtered_df, ticker):
     """Plots the Return Chart"""
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -42,8 +45,26 @@ def plot_return_chart(filtered_df, ticker):
     plt.xticks(rotation=45, fontsize=10)
     plt.yticks(fontsize=10)
     st.pyplot(fig)
+
+
 # Streamlit App
 st.title("Stock Performance Charts")
+
+# Sidebar for news
+st.sidebar.title("Latest News")
+
+# Example list of news items
+news_items = [
+    "Market reaches new highs amid economic recovery.",
+    "Tech stocks lead the way in the latest rally.",
+    "Economic growth forecasts revised upwards.",
+    "Investors show increased interest in renewable energy.",
+    "Global markets react positively to trade agreement."
+]
+
+# Display each news item in the sidebar
+for news in news_items:
+    st.sidebar.markdown(f"* {news}")
 
 # User Inputs
 start_date = st.date_input("Start Date")
@@ -71,6 +92,8 @@ if ticker and start_date and end_date:
 
         # Plot Logarithmic Relative Return Chart
         plot_log_return_chart(filtered_df, ticker)
+
+        # Plot Return Chart
         plot_return_chart(filtered_df, ticker)
     else:
         st.warning("No data available for the specified inputs.")
